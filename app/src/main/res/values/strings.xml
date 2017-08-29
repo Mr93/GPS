@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GPS Realtime</string>
+    <string name="title_permission_location_dialog">Permission Request</string>
+    <string name="message_permission_location_dialog">Need location/gps permission to use this feature, pls go to settings and enable location permission for this app</string>
+    <string name="longtitude">Longtitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="api_key">AIzaSyCONne5KhdgSIdehHwMo-bKey-t1Xzob5k</string>
+</resources>
