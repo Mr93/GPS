@@ -20,6 +20,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import com.unity3d.player.UnityPlayer;
+import com.unity3d.player.UnityPlayerActivity;
+
 public class LauncherActivity extends AppCompatActivity {
 
 	private static final String BASE_URL = "https://maps.googleapis.com";
@@ -97,12 +100,5 @@ public class LauncherActivity extends AppCompatActivity {
 				Log.e(TAG, "onFailure: " + call.toString(), t);
 			}
 		});
-	}
-
-	public void updateDirections(PluginCallback pluginCallback){
-		this.pluginCallback = pluginCallback;
-		if (tempEndAddress != null && !"".equalsIgnoreCase(tempEndAddress)){
-			pluginCallback.onWaypointFetched(tempEndAddress);
-		}
 	}
 }
