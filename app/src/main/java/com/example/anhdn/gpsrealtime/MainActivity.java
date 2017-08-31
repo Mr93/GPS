@@ -32,7 +32,6 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 public class MainActivity extends AppCompatActivity {
 
-	private static final int MY_PERMISSION_LOCATION_REQUEST = 1;
 	public static final int INTERVAL_REQUEST = 1000;
 	public static final int FASTEST_INTERVAL_REQUEST = 5000;
 	public static final String TAG = MainActivity.class.getSimpleName();
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		checkLocationPermission();
+		createLocationRequest();
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 		locationCallback = new LocationCallback() {
 			@Override
@@ -88,34 +87,8 @@ public class MainActivity extends AppCompatActivity {
 		super.onSaveInstanceState(outState);
 	}
 
-	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		switch (requestCode) {
-			case MY_PERMISSION_LOCATION_REQUEST:
-				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					createLocationRequest();
-				} else {
-					System.exit(0);
-				}
-		}
-	}
 
-	private void checkLocationPermission() {
-		if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
-				.PERMISSION_GRANTED) {
-			if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-				new AlertDialog.Builder(this)
-						.setTitle(getResources().getString(R.string.title_permission_location_dialog))
-						.setMessage(getResources().getString(R.string.message_permission_location_dialog))
-						.show();
-			} else {
-				ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-						MY_PERMISSION_LOCATION_REQUEST);
-			}
-		} else {
-			createLocationRequest();
-		}
-	}
+
 
 	private void createLocationRequest() {
 		locationRequest = new LocationRequest();
