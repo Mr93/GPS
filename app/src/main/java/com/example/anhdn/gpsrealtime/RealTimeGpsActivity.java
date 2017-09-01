@@ -1,17 +1,11 @@
 package com.example.anhdn.gpsrealtime;
 
-import android.Manifest;
 import android.content.IntentSender;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.example.anhdn.gpsrealtime.interfaces.PluginCallback;
 import com.google.android.gms.common.api.ApiException;
@@ -30,11 +24,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 
-public class MainActivity extends AppCompatActivity {
+public class RealTimeGpsActivity extends AppCompatActivity {
 
 	public static final int INTERVAL_REQUEST = 1000;
 	public static final int FASTEST_INTERVAL_REQUEST = 5000;
-	public static final String TAG = MainActivity.class.getSimpleName();
+	public static final String TAG = RealTimeGpsActivity.class.getSimpleName();
 	public static final int REQUEST_CHECK_SETTINGS = 2;
 	public static final String REQUESTING_LOCATION_UPDATES = "REQUESTING_LOCATION_UPDATES";
 	private FusedLocationProviderClient fusedLocationProviderClient;
@@ -49,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+//		setContentView(R.layout.activity_main);
 		createLocationRequest();
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 		locationCallback = new LocationCallback() {
@@ -116,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 					case CommonStatusCodes.RESOLUTION_REQUIRED:
 						try {
 							ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-							resolvableApiException.startResolutionForResult(MainActivity.this, REQUEST_CHECK_SETTINGS);
+							resolvableApiException.startResolutionForResult(RealTimeGpsActivity.this, REQUEST_CHECK_SETTINGS);
 						} catch (IntentSender.SendIntentException e1) {
 							Log.e(TAG, "onFailure: ", e);
 						}
